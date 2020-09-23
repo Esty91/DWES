@@ -1,5 +1,6 @@
 import Laboral.Empleado;
 import Laboral.Nomina;
+import Laboral.Validaciones;
 
 public class CalculaNominas {
 
@@ -69,31 +70,202 @@ public class CalculaNominas {
 		 * 4.3. Declare un método privado escribe que reciba los valores de los dos
 		 * empleados e imprima sus atributos y el sueldo que cada uno gana.
 		 * 
-		 *  
-		 *  4.4. Haga
-		 * una llamada en el programa principal a ese método. 
 		 * 
-		 * 4.5. Incremente los años
-		 * trabajados del segundo empleado y haga que la categoría del primero sea 9.
-		 * 4.6. Imprima de nuevo ambos empleados y su sueldo. 5. Modificar el código
-		 * para comprobar que los datos que se pasan son correctos cuando se crea un
-		 * nuevo Empleado y en caso contrario se eleve la excepción
-		 * DatosNoCorrectosException. Declara un manejador de excepciones que cuando se
-		 * produzca dicha excepción, emita el mensaje “Datos no correctos”, y termine la
-		 * ejecución. Modifica el programa principal para que pueda elevarse esta
-		 * excepción. Deberás controlar las excepciones del sistema, así como documenta
-		 * convenientemente el código generando el Javadoc.
+		 * 4.4. Haga una llamada en el programa principal a ese método.
+		 * 
+		 * 4.5. Incremente los años trabajados del segundo empleado y haga que la
+		 * categoría del primero sea 9.
+		 * 
+		 * 4.6. Imprima de nuevo ambos empleados y su sueldo.
+		 * 
+		 * 5. Modificar el código para comprobar que los datos que se pasan son
+		 * correctos cuando se crea un nuevo Empleado y en caso contrario se eleve la
+		 * excepción DatosNoCorrectosException.
+		 * 
+		 * Declara un manejador de excepciones que cuando se produzca dicha excepción,
+		 * emita el mensaje “Datos no correctos”, y termine la ejecución. Modifica el
+		 * programa principal para que pueda elevarse esta excepción. Deberás controlar
+		 * las excepciones del sistema, así como documenta convenientemente el código
+		 * generando el Javadoc.
 		 */
+		String sNombre1 = null;
+		String sDni1 = null;
+		char cSexo1 = 0;
 
-		Empleado oEmp1 = new Empleado("James Cosling", "32000032G", 'M', (byte) 4, (byte) 7);
-		Empleado oEmp2 = new Empleado("Ada Lovelace", "32000031R", 'F');
+		byte bCategoria = 0;
+		byte bAnyos = 0;
+		boolean bError = true;
+
+		String sNombre2 = null;
+		String sDni2 = null;
+		char cSexo2 = 0;
+
+		do {
+
+			try {
+				sNombre1 = Validaciones.leer("Introduce nombre");
+				if (sNombre1 != null && sNombre1.length() > 1 && sNombre1.length() <= 40) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (sNombre1 == null || sNombre1.length() <= 1 || sNombre1.length() > 40) {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		do {
+			try {
+				sDni1 = Validaciones.leer("Introduce DNI");
+				if (sDni1 != null && sDni1.length() == 9) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (sDni1 == null || sDni1.length() != 9) {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		byte bOption = (byte) Validaciones.valida("Introduce sexo"
+				//
+				+ "\nHOMBRE: (1)"
+				//
+				+ "\nMUJER: (2)", 1, 2, 3);
+
+		if (bOption == 1) {
+			cSexo1 = 'H';
+		} else if (bOption == 2) {
+			cSexo1 = 'M';
+		}
+
+		do {
+			try {
+				bCategoria = (byte) Validaciones.valida("Introduce categoria", 1, 10, 3);
+				if (bCategoria >= 1 && bCategoria <= 10) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (bCategoria < 1 || bCategoria > 10) {
+					System.out.println("Datos no correctos.");
+				}
+
+			} catch (Exception e) {
+				bCategoria = 1;
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		do {
+			try {
+
+				bAnyos = (byte) Validaciones.valida("Introduce anyos", 1, 70, 3);
+				if (bAnyos >= 1 && sNombre1.length() <= 80) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (bAnyos < 1 || bAnyos > 80) {
+					System.out.println("Datos no correctos.");
+				}
+
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		do {
+
+			try {
+				sNombre1 = Validaciones.leer("Introduce nombre");
+				if (sNombre1 != null && sNombre1.length() > 1 && sNombre1.length() <= 40) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (sNombre1 == null || sNombre1.length() <= 1 || sNombre1.length() > 40) {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		do {
+
+			try {
+				sNombre2 = Validaciones.leer("Introduce nombre segundo empleado");
+				if (sNombre2 != null && sNombre2.length() > 1 && sNombre2.length() <= 40) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (sNombre2 == null || sNombre2.length() <= 1 || sNombre2.length() > 40) {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		do {
+			try {
+				sDni2 = Validaciones.leer("Introduce DNI segundo empleado");
+				if (sDni2 != null && sDni2.length() == 9) {
+					bError = false;
+				} else {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (NumberFormatException e) {
+				if (sDni2 == null || sDni2.length() != 9) {
+					System.out.println("Datos no correctos.");
+				}
+			} catch (Exception e) {
+				System.out.println("Datos no correctos.");
+			}
+		} while (bError);
+
+		byte bOption2 = (byte) Validaciones.valida("Introduce sexo segundo empleado"
+				//
+				+ "\nHOMBRE: (1)"
+				//
+				+ "\nMUJER: (2)", 1, 2, 3);
+
+		if (bOption2 == 1) {
+			cSexo1 = 'H';
+		} else if (bOption2 == 2) {
+			cSexo1 = 'M';
+		}
+
+		Empleado oEmp1 = new Empleado(sNombre1, sDni1, cSexo1, bCategoria, bAnyos);
+
+		Empleado oEmp2 = new Empleado(sNombre2, sDni2, cSexo2);
 		escribe(oEmp1, oEmp2);
 
-		
 		oEmp2.setbAnyos((byte) 2);
 		oEmp1.setbCategoria((byte) 9);
+		escribe(oEmp1, oEmp2);
+
 	}
 
+	/**
+	 * 
+	 * @param oEmp1 tipo empleado
+	 * @param oEmp2
+	 */
 	private static void escribe(Empleado oEmp1, Empleado oEmp2) {
 		System.out.println(oEmp1.imprimeEmpleado(oEmp1));
 		System.out.println(Nomina.sueldo(oEmp1));

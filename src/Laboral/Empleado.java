@@ -35,7 +35,7 @@ public class Empleado extends Persona {
 
 	public boolean setbAnyos(byte bAnyos) {
 		boolean bExito = false;
-		if (bAnyos >= 0 && bAnyos <= 70) {
+		if (bAnyos >= 1 && bAnyos <= 70) {
 			bExito = true;
 			this.bAnyos = bAnyos;
 		}
@@ -48,6 +48,10 @@ public class Empleado extends Persona {
 		return bCategoria;
 	}
 
+	/**
+	 * 
+	 * @param oEmpleado tipo empleado
+	 */
 	public void incrAnyo(Empleado oEmpleado) {
 
 		byte bAnyo = (byte) (oEmpleado.getbAnyos() + 1);
@@ -55,7 +59,11 @@ public class Empleado extends Persona {
 		oEmpleado.setbAnyos(bAnyo);
 
 	}
-
+    /**
+     * 
+     * @param oEmpleado tipo empleado
+     * @return
+     */
 	public String imprimeEmpleado(Empleado oEmpleado) {
 		return "  Empleado: \n" + Empleado.super.imprime()
 		//

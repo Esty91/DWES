@@ -19,11 +19,31 @@ public class Persona {
 		this.cSexo = cSexo;
 	}
 
-	public void setsDni(String sDni) {
-		this.sDni = sDni;
+	public void setsNombre(String sNombre) {
+		if (sNombre != null && sNombre.length() > 1 && sNombre.length() <= 40) {
+			this.sNombre = sNombre;
+		}
+
+	}
+
+	public void setcSexo(char cSexo) {
+		if (cSexo != 0 && cSexo >=1 && cSexo <=2) {
+			this.cSexo = cSexo;
+		}
+
+	}
+
+	public boolean setsDni(String sDni) {
+		boolean bExito = false;
+		if (sDni != null && sDni.length() == 9) {
+			bExito = true;
+			this.sDni = sDni;
+		}
+
+		return bExito;
 	}
 
 	public String imprime() {
-		return "  Nombre: "+this.sNombre +"  Dni: "+this.sDni;
+		return "  Nombre: " + this.sNombre + "  Dni: " + this.sDni;
 	}
 }
